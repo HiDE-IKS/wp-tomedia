@@ -34,9 +34,9 @@ on-db:
 	docker exec -it mysql57 bin/bash
 
 # nodeのコンテナの中に入る
-.PHONY: on-node
-on-node:
-	docker exec -i -t nn-app bash
+.PHONY: on-wp
+on-wp:
+	docker exec -i -t wp bash
 
 # コンテナ、イメージを削除
 .PHONY: clean
