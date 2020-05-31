@@ -18,6 +18,11 @@ logs:
 kill:
 	docker-compose kill
 
+# nodeのコンテナの中に入る
+.PHONY: dump
+dump:
+	docker exec -it mysql57 mysqldump -u wordpress -pwordpress wordpress > db/dump.sql
+
 # コンテナの状態を表示
 .PHONY: ps
 ps:
