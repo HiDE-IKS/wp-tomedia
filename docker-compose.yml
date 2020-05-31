@@ -8,11 +8,7 @@ services:
       - db_data:/var/lib/mysql
       - ./db/dump.sql:/docker-entrypoint-initdb.d/install_wordpress.sql
     restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: wordpress
-      MYSQL_DATABASE: wordpress
-      MYSQL_USER: wordpress
-      MYSQL_PASSWORD: wordpress
+    env_file: .env
 
   wordpress:
     image: wordpress:latest
@@ -25,9 +21,9 @@ services:
     volumes:
       - ./themes:/var/www/html/wp-content/themes
       - ./plugins:/var/www/html/wp-content/plugins
+    env_file: .env
     environment:
       WORDPRESS_DB_HOST: db:3306
-      WORDPRESS_DB_PASSWORD: wordpress
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
