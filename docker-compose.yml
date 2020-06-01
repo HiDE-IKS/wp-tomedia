@@ -5,8 +5,8 @@ services:
     image: mysql:5.7
     container_name: mysql57
     volumes:
-      - db_data:/var/lib/mysql
-      - ./db/dump.sql:/docker-entrypoint-initdb.d/install_wordpress.sql
+      - db-data:/var/lib/mysql
+      - ./db/mysql.dump.sql:/docker-entrypoint-initdb.d/install_wordpress.sql
     restart: always
     env_file: .env
 
@@ -19,8 +19,7 @@ services:
       - '8000:80'
     restart: always
     volumes:
-      - ./themes:/var/www/html/wp-content/themes
-      - ./plugins:/var/www/html/wp-content/plugins
+      - ./wp:/var/www/html
     env_file: .env
     environment:
       WORDPRESS_DB_HOST: db:3306
@@ -39,4 +38,5 @@ services:
       - /sessions
 
 volumes:
-  db_data:
+  db-data:
+    driver: local
